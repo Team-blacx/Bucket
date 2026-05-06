@@ -68,7 +68,7 @@ Visit the official landing page: [https://team-blacx.github.io/Bucket/](https://
 <p align="center">
   <img src="https://team-blacx.github.io/Bucket/5914.jpg" width="200">
   <img src="https://team-blacx.github.io/Bucket/5915.jpg" width="200">
-  <img src="https://team-blacx.github.io/Bucket/5916.jpg" width="200">
+  <img src="https://team-blacx.github.io/Bucket/5917.jpg" width="200">
   <img src="https://team-blacx.github.io/Bucket/5918.jpg" width="200">
 </p>
 
