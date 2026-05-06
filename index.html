@@ -247,7 +247,7 @@ nav{
 }
 .sec-title{
   font-size:22px;font-weight:800;letter-spacing:-.3px;
-  margin-bottom:14px;
+  margin-bottom:14px;padding-left:2px;
 }
 
 /* ── DESCRIPTION ── */
@@ -349,7 +349,7 @@ nav{
 .iv.g{color:var(--green)}.iv.b{color:var(--accent)}
 
 /* ── STEPS ── */
-.steps{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.steps{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;padding:0 4px}
 .srow{display:flex;align-items:flex-start;gap:14px;padding:16px 18px;border-bottom:1px solid var(--border)}
 .srow:last-child{border:none}
 .snum{
@@ -362,6 +362,10 @@ nav{
 .stxt p{font-size:13px;color:var(--text3);line-height:1.4}
 
 /* ── DEV + BMC ── */
+.dev-section{
+  padding-top:12px;
+  border-top:1px solid var(--border);
+}
 .dev-card{
   background:var(--card);
   border:1px solid rgba(255,255,255,0.15);
@@ -425,8 +429,8 @@ footer p{font-size:12px;color:var(--text3);line-height:1.8}
   .dl-cta h2{font-size:22px}
 }
 @media(max-width:480px){
-  .wrap{padding:0 16px}
-  nav{padding:0 16px}
+  .wrap{padding:0 20px}
+  nav{padding:0 20px}
   .hero-banner{max-height:200px}
   .hero-icon{width:96px;height:96px}
   .hero-title{font-size:22px}
@@ -634,7 +638,7 @@ footer p{font-size:12px;color:var(--text3);line-height:1.8}
 </div>
 
 <!-- DEVELOPER -->
-<div class="wrap sec">
+<div class="wrap sec dev-section">
   <div class="sec-label">Developer</div>
   <div class="sec-title">Meet the Developer</div>
   <div class="dev-card">
