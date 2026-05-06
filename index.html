@@ -701,7 +701,8 @@ async function updateViewCount(){
   const el=document.getElementById('view-count');
   el.textContent='⋯';
   try{
-    const res=await fetch('https://api.countapi.xyz/hit/team-blacx-bucket/views');
+    // Unique key to ensure fresh start
+    const res=await fetch('https://api.countapi.xyz/hit/bucket-live-v2/views');
     if(!res.ok) throw new Error('API error');
     const data=await res.json();
     if(data.value){
@@ -713,7 +714,7 @@ async function updateViewCount(){
     // Retry once after 2s
     setTimeout(async ()=>{
       try{
-        const res=await fetch('https://api.countapi.xyz/hit/team-blacx-bucket/views');
+        const res=await fetch('https://api.countapi.xyz/hit/bucket-live-v2/views');
         const data=await res.json();
         el.textContent=data.value ? data.value.toLocaleString() : '—';
       }catch(e2){
@@ -726,7 +727,7 @@ updateViewCount();
 
 // Track unique sessions
 if(!sessionStorage.getItem('bucket_tracked')){
-  fetch('https://api.countapi.xyz/hit/team-blacx-bucket/sessions').catch(()=>{});
+  fetch('https://api.countapi.xyz/hit/bucket-live-v2/sessions').catch(()=>{});
   sessionStorage.setItem('bucket_tracked','1');
 }
 </script>
