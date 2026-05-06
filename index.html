@@ -141,19 +141,18 @@ nav{
 .nav-logo img{width:28px;height:28px}
 .nav-logo span{font-size:14px;font-weight:600;color:var(--text2)}
 .nav-right{display:flex;align-items:center;gap:14px}
-.nav-stats{
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:3px 10px;
-  overflow:hidden;
+.nav-right{display:flex;align-items:center;gap:10px}
+.nav-btn{
+  display:flex;align-items:center;gap:5px;
+  background:var(--card);border:1px solid var(--border);
+  color:var(--text2);font-size:13px;font-weight:600;
+  padding:4px 12px;border-radius:20px;text-decoration:none;
+  transition:all .15s;
 }
-.nav-stats img{
-  display:block;
-  height:20px;
-  width:auto;
-  object-fit:contain;
-}
-.nav-dl{
+.nav-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.nav-btn svg{width:14px;height:14px;fill:currentColor}
+
+/* ── FOOTER ── */
   background:var(--accent);color:#fff;
   font-size:13px;font-weight:600;
   padding:6px 16px;border-radius:20px;
@@ -424,6 +423,14 @@ footer{border-top:1px solid var(--border);padding:24px 0 40px;text-align:center}
 .foot-links a{font-size:13px;color:var(--text3);text-decoration:none}
 .foot-links a:hover{color:var(--accent)}
 footer p{font-size:12px;color:var(--text3);line-height:1.8}
+.footer-counter{
+  display:flex;flex-direction:column;align-items:center;
+  margin:16px 0;
+}
+.counter-label{
+  font-size:13px;font-weight:800;color:var(--text2);
+  margin-bottom:6px;letter-spacing:.5px;text-transform:uppercase;
+}
 
 /* ── RESPONSIVE ── */
 @media(max-width:700px){
@@ -470,13 +477,16 @@ footer p{font-size:12px;color:var(--text3);line-height:1.8}
     <img src="appicon.png" alt="Bucket">
     <span>Bucket</span>
   </div>
-    <div class="nav-right">
-      <div class="nav-stats">
-        <a href="https://www.hitwebcounter.com/" target="_blank" rel="noopener" title="Live Views">
-          <img src="https://www.hitwebcounter.com/counter/counter.php?page=21495988&style=0007&nbdigits=9&type=page" alt="Live Views" decoding="async" style="border:0;height:20px;" />
-        </a>
-      </div>
-    </div>
+  <div class="nav-right">
+    <a href="https://t.me/team_blacx" target="_blank" rel="noopener" class="nav-btn">
+      <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+      Telegram
+    </a>
+    <a href="https://github.com/Team-blacx" target="_blank" rel="noopener" class="nav-btn">
+      <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 2.002-.394a6.878 6.878 0 0 1 1.754.236 3.924 3.924 0 0 1 1.465.67c.436-.12 1.048-.194 1.626-.194.578 0 1.19.074 1.626.194a3.924 3.924 0 0 1 1.465-.67 6.878 6.878 0 0 1 1.754-.236c.997.072 2.002.394 2.002.394.645 1.653.24 2.873.105 3.176.77.84 1.235 1.91 1.235 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.605-.015 2.896-.015 3.286 0 .315.21.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      GitHub
+    </a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -684,10 +694,14 @@ footer p{font-size:12px;color:var(--text3);line-height:1.8}
 <!-- FOOTER -->
 <div class="wrap">
   <footer>
-<div class="foot-links">
+    <div class="foot-links">
       <a href="#">Privacy Policy</a>
       <a href="#">Security Model</a>
       <a href="https://github.com/Team-blacx/Bucket">GitHub</a>
+    </div>
+    <div class="footer-counter">
+      <span class="counter-label">Total Visitors</span>
+      <img src="https://www.hitwebcounter.com/counter/counter.php?page=21495988&style=0007&nbdigits=9&type=page" alt="Total Visitors" decoding="async" style="border:0;height:22px;" />
     </div>
     <p>© 2025 Blacx-Tech · Bucket Messenger v2.7 Beta<br>
     Private · Decentralized · Secure · Your device is your server.<br>
