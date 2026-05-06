@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://team-blacx.github.io/Bucket/appicon.png" alt="Bucket" width="120" height="120">
+  <img src="https://team-blacx.github.io/Bucket/appicon.png" alt="Bucket" width="120" height="120" style="border-radius: 0; border: none;">
 </p>
 
 <p align="center">
