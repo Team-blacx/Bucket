@@ -696,18 +696,39 @@ footer p{font-size:12px;color:var(--text3);line-height:1.8}
 </div>
 
 <script>
-// Live View Counter
+// Live View Counter — Real-time tracking
 async function updateViewCount(){
   const el=document.getElementById('view-count');
+  el.textContent='⋯';
   try{
     const res=await fetch('https://api.countapi.xyz/hit/team-blacx-bucket/views');
+    if(!res.ok) throw new Error('API error');
     const data=await res.json();
-    el.textContent=data.value.toLocaleString();
+    if(data.value){
+      el.textContent=data.value.toLocaleString();
+    } else {
+      throw new Error('No value');
+    }
   }catch(e){
-    el.textContent='1.2K';
+    // Retry once after 2s
+    setTimeout(async ()=>{
+      try{
+        const res=await fetch('https://api.countapi.xyz/hit/team-blacx-bucket/views');
+        const data=await res.json();
+        el.textContent=data.value ? data.value.toLocaleString() : '—';
+      }catch(e2){
+        el.textContent='—';
+      }
+    },2000);
   }
 }
 updateViewCount();
+
+// Track unique sessions
+if(!sessionStorage.getItem('bucket_tracked')){
+  fetch('https://api.countapi.xyz/hit/team-blacx-bucket/sessions').catch(()=>{});
+  sessionStorage.setItem('bucket_tracked','1');
+}
 </script>
 
 </body>
