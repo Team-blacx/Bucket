@@ -21,7 +21,7 @@
     <img src="https://img.shields.io/badge/⬇️_Download_APK-30D158?style=for-the-badge" alt="Download APK">
   </a>
   &nbsp;
-  <a href="https://t.me/team-blacx" target="_blank">
+  <a href="https://t.me/team_blacx" target="_blank">
     <img src="https://img.shields.io/badge/Telegram-Join_2AABEE?style=for-the-badge&logo=telegram" alt="Telegram">
   </a>
 </p>
@@ -84,7 +84,7 @@ Built for journalists, activists, and anyone who believes a conversation should 
 
 ## 📬 Connect
 
-- **Telegram:** [t.me/team-blacx](https://t.me/team-blacx)
+- **Telegram:** [t.me/team-blacx](https://t.me/team_blacx)
 - **Support:** [buymeacoffee.com/blacx](https://buymeacoffee.com/blacx)
 
 ---
