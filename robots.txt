@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://team-blacx.github.io/Bucket/sitemap.xml
