@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
+<title>Bucket Messenger — Private. Decentralized. Secure.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg: #080a0e;
+  --bg2: #0d1117;
+  --surface: #111620;
+  --surface2: #161c28;
+  --surface3: #1d2535;
+  --border: rgba(255,255,255,0.06);
+  --border2: rgba(255,255,255,0.1);
+  --accent: #4f8ef7;
+  --accent2: #7eb3ff;
+  --accent-glow: rgba(79,142,247,0.15);
+  --green: #3dd68c;
+  --green-dim: rgba(61,214,140,0.12);
+  --text: #f0f4ff;
+  --text2: #a8b4cc;
+  --text3: #5a6680;
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --r: 16px;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* NOISE TEXTURE OVERLAY */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+  opacity: 0.4;
+}
+
+/* NAV */
+nav{
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(8,10,14,0.8);
+  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; height: 56px;
+  width: 100%;
+}
+.nav-brand{
+  font-family: var(--font-display);
+  font-size: 15px; font-weight: 700; letter-spacing: 0.5px;
+  color: var(--text2); display: flex; align-items: center; gap: 10px;
+  white-space: nowrap;
+}
+.nav-dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 2s ease infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.nav-actions{display:flex;gap:10px;align-items:center}
+.nav-btn{
+  font-family: var(--font-body); font-size: 13px; font-weight: 500;
+  color: var(--text3); padding: 6px 14px; border-radius: 20px;
+  border: 1px solid var(--border2); text-decoration: none; transition: all .2s;
+  white-space: nowrap;
+}
+.nav-btn:hover{color:var(--text);border-color:var(--border2)}
+.nav-btn.primary{background:var(--accent);color:#fff;border-color:transparent}
+.nav-btn.primary:hover{background:var(--accent2)}
+
+/* HERO */
+.hero{
+  position: relative; z-index: 1;
+  padding: 72px 28px 60px;
+  max-width: 1000px; margin: 0 auto;
+  width: 100%;
+}
+.hero::before{
+  content:''; position:absolute;
+  top:-100px; left:50%; transform:translateX(-50%);
+  width:600px; height:500px; border-radius:50%;
+  background: radial-gradient(ellipse, rgba(79,142,247,0.12) 0%, transparent 70%);
+  pointer-events:none; z-index:0;
+}
+
+.hero-grid{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:start;position:relative;z-index:1}
+
+.hero-icon-wrap{position:relative;flex-shrink:0}
+.hero-icon{
+  width: 128px; height: 128px; border-radius: 28px;
+  overflow: hidden; border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 0 0 1px rgba(79,142,247,0.2), 0 20px 60px rgba(0,0,0,0.6);
+  background: #fff;
+}
+.hero-icon img{width:100%;height:100%;display:block;object-fit:cover}
+.hero-icon-ring{
+  position:absolute;inset:-6px;border-radius:34px;
+  border:1px solid rgba(79,142,247,0.2);
+  animation:ring-pulse 3s ease infinite;
+}
+@keyframes ring-pulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:.15;transform:scale(1.03)}}
+
+.hero-meta{min-width:0}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--green-dim);border:1px solid rgba(61,214,140,0.2);
+  border-radius:20px;padding:4px 12px;
+  font-size:11px;font-weight:500;color:var(--green);
+  letter-spacing:.5px;text-transform:uppercase;margin-bottom:14px;
+  max-width: 100%;
+}
+.hero-name{
+  font-family:var(--font-display);
+  font-size:42px;font-weight:800;letter-spacing:-1.5px;
+  line-height:1.0;margin-bottom:6px;
+  background:linear-gradient(135deg,#f0f4ff 0%,#7eb3ff 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  word-break: break-word;
+}
+.hero-tagline{
+  font-size:15px;color:var(--text3);margin-bottom:24px;
+  font-style:italic;letter-spacing:.2px;
+  word-break: break-word;
+}
+.hero-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.pill{
+  display:inline-flex;align-items:center;gap:5px;
+  background:var(--surface2);border:1px solid var(--border2);
+  border-radius:20px;padding:5px 12px;font-size:12px;color:var(--text2);
+  white-space: nowrap;
+}
+.pill span{font-size:14px}
+.hero-cta{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--accent);color:#fff;
+  border-radius:12px;padding:13px 28px;
+  font-family:var(--font-display);font-size:15px;font-weight:700;
+  text-decoration:none;transition:all .2s;letter-spacing:.2px;
+  box-shadow:0 4px 24px rgba(79,142,247,0.35);
+  white-space: nowrap;
+}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-1px);box-shadow:0 8px 32px rgba(79,142,247,0.45)}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:6px;
+  background:transparent;color:var(--text2);
+  border:1px solid var(--border2);border-radius:12px;padding:13px 22px;
+  font-size:14px;font-weight:500;text-decoration:none;transition:all .2s;
+}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+/* STAT STRIP */
+.stats-strip{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  max-width:1000px;margin:0 auto 0;padding:0 28px;gap:12px;
+  width: 100%;
+}
+.stat-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);padding:18px 16px;text-align:center;
+  transition:border-color .2s;
+}
+.stat-card:hover{border-color:rgba(79,142,247,0.3)}
+.stat-val{
+  font-family:var(--font-display);font-size:26px;font-weight:800;
+  letter-spacing:-0.5px;margin-bottom:3px;
+}
+.stat-val.accent{color:var(--accent2)}
+.stat-val.green{color:var(--green)}
+.stat-val.gold{color:#f5c542}
+.stat-stars{font-size:11px;color:#f5c542;letter-spacing:2px;margin-bottom:3px}
+.stat-lbl{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.6px}
+
+/* SECTION WRAPPER */
+.outer{max-width:1000px;margin:0 auto;padding:0 28px;width:100%}
+
+/* DIVIDER */
+.sec-gap{height:48px}
+
+/* SECTION LABEL */
+.sec-label{
+  font-family:var(--font-display);font-size:11px;font-weight:600;
+  color:var(--accent);letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:10px;
+}
+.sec-title{
+  font-family:var(--font-display);font-size:28px;font-weight:800;
+  letter-spacing:-0.6px;margin-bottom:20px;line-height:1.1;
+  word-break: break-word;
+}
+
+/* SCREENSHOTS */
+.shots-scroll{
+  display:flex;gap:14px;overflow-x:auto;
+  padding:4px 4px 12px;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  margin: 0 -4px;
+}
+.shots-scroll::-webkit-scrollbar{display:none}
+.shot{
+  flex-shrink:0;width:200px;
+  background:var(--surface);
+  border-radius:24px;overflow:hidden;
+  border:1px solid var(--border2);
+  box-shadow:0 8px 32px rgba(0,0,0,0.5);
+  transition:transform .25s,box-shadow .25s;
+}
+.shot:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,0.6)}
+.shot img{width:100%;display:block;height:auto}
+.shot-cap{
+  padding:10px 12px;font-size:11px;
+  color:var(--text3);text-transform:uppercase;letter-spacing:.7px;
+  border-top:1px solid var(--border);background:var(--surface);
+}
+
+/* FEATURED BANNER IMAGE */
+.banner-img{
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid var(--border2);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  margin-top: 14px;
+}
+.banner-img img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* WHATS NEW */
+.wn-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);padding:24px;
+}
+.wn-badge{
+  display:inline-block;background:rgba(79,142,247,0.12);
+  border:1px solid rgba(79,142,247,0.2);color:var(--accent2);
+  border-radius:6px;padding:3px 10px;font-size:11px;font-weight:600;
+  letter-spacing:.3px;margin-bottom:14px;
+}
+.wn-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.wn-list li{
+  display:flex;gap:12px;align-items:flex-start;
+  font-size:14px;color:var(--text2);line-height:1.5;
+}
+.wn-list li::before{
+  content:'→';color:var(--accent);font-size:13px;flex-shrink:0;margin-top:1px;
+}
+
+/* FEATURES GRID */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.feat-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);padding:22px 20px;
+  transition:border-color .2s,background .2s;
+  position:relative;overflow:hidden;
+}
+.feat-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(79,142,247,0.4),transparent);
+  opacity:0;transition:opacity .2s;
+}
+.feat-card:hover{border-color:rgba(79,142,247,0.25);background:var(--surface2)}
+.feat-card:hover::before{opacity:1}
+.feat-ico{
+  width:44px;height:44px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;margin-bottom:14px;
+}
+.ico-b{background:rgba(79,142,247,0.12)} .ico-g{background:rgba(61,214,140,0.1)}
+.ico-o{background:rgba(255,159,10,0.1)} .ico-r{background:rgba(255,69,58,0.1)}
+.ico-p{background:rgba(175,82,222,0.1)} .ico-c{background:rgba(90,200,250,0.1)}
+.feat-name{font-family:var(--font-display);font-size:14px;font-weight:700;margin-bottom:6px}
+.feat-desc{font-size:13px;color:var(--text3);line-height:1.5}
+
+/* DESCRIPTION */
+.desc-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);padding:28px;
+}
+.desc-card p{font-size:15px;color:var(--text2);line-height:1.7;margin-bottom:14px}
+.desc-card p:last-child{margin:0}
+.desc-card strong{color:var(--text);font-weight:600}
+
+/* PRIVACY */
+.priv-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.priv-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);padding:20px;
+}
+.priv-icon{font-size:28px;margin-bottom:10px}
+.priv-title{font-family:var(--font-display);font-size:14px;font-weight:700;margin-bottom:5px}
+.priv-desc{font-size:13px;color:var(--text3);line-height:1.5}
+.priv-main{
+  background:linear-gradient(135deg,var(--surface2),var(--surface));
+  border:1px solid rgba(61,214,140,0.2);
+  border-radius:var(--r);padding:24px;
+  display:flex;flex-direction:column;gap:12px;
+}
+.priv-chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip-g{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(61,214,140,0.1);border:1px solid rgba(61,214,140,0.2);
+  color:var(--green);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:500;
+  white-space: nowrap;
+}
+.chip-b{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(79,142,247,0.1);border:1px solid rgba(79,142,247,0.2);
+  color:var(--accent2);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:500;
+  white-space: nowrap;
+}
+.zero-banner{
+  background:rgba(61,214,140,0.07);border:1px solid rgba(61,214,140,0.15);
+  border-radius:10px;padding:12px 16px;
+  font-size:14px;font-weight:600;color:var(--green);
+  display:flex;align-items:center;gap:8px;
+}
+
+/* INFO TABLE */
+.info-table{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);overflow:hidden;
+}
+.irow{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 20px;border-bottom:1px solid var(--border);font-size:14px;
+  gap: 12px;
+}
+.irow:last-child{border-bottom:none}
+.ik{color:var(--text3);flex-shrink:0}.iv{color:var(--text2);font-weight:500;text-align:right}
+.iv.g{color:var(--green)}.iv.b{color:var(--accent2)}
+
+/* STEPS */
+.steps-list{display:flex;flex-direction:column;gap:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.step-row{
+  display:flex;align-items:flex-start;gap:18px;
+  padding:20px 22px;border-bottom:1px solid var(--border);
+  transition:background .2s;
+}
+.step-row:last-child{border-bottom:none}
+.step-row:hover{background:var(--surface2)}
+.step-num{
+  width:30px;height:30px;border-radius:50%;
+  background:var(--accent);color:#fff;
+  font-family:var(--font-display);font-size:14px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  box-shadow:0 0 12px rgba(79,142,247,0.4);margin-top:1px;
+}
+.step-txt h4{font-family:var(--font-display);font-size:15px;font-weight:700;margin-bottom:3px}
+.step-txt p{font-size:13px;color:var(--text3);line-height:1.4}
+
+/* DEVELOPER */
+.dev-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);padding:20px 22px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.dev-left h4{font-family:var(--font-display);font-size:15px;font-weight:700;margin-bottom:3px}
+.dev-left p{font-size:13px;color:var(--text3)}
+.dev-badge{
+  background:var(--surface2);border:1px solid var(--border2);
+  border-radius:8px;padding:5px 12px;font-size:12px;color:var(--text2);font-weight:500;
+  white-space: nowrap;
+}
+
+/* BMC */
+.bmc-card{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  background:linear-gradient(135deg,#1a1500,#201a00);
+  border:1px solid rgba(245,197,66,0.2);border-radius:var(--r);
+  padding:20px 22px;text-decoration:none;transition:all .2s;
+}
+.bmc-card:hover{border-color:rgba(245,197,66,0.4);transform:translateY(-1px)}
+.bmc-left{display:flex;align-items:center;gap:14px}
+.bmc-ico{
+  width:48px;height:48px;border-radius:12px;background:#FFDD00;
+  display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;
+}
+.bmc-txt h4{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--text);margin-bottom:2px}
+.bmc-txt p{font-size:13px;color:var(--text3)}
+.bmc-action{
+  background:#FFDD00;color:#000;font-family:var(--font-display);
+  font-size:13px;font-weight:700;border-radius:20px;padding:8px 18px;white-space:nowrap;
+  flex-shrink: 0;
+}
+
+/* DOWNLOAD HERO */
+.dl-hero{
+  position:relative;overflow:hidden;
+  background:var(--surface);border:1px solid rgba(79,142,247,0.2);
+  border-radius:20px;padding:48px 36px;text-align:center;
+  width: 100%;
+}
+.dl-hero::before{
+  content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);
+  width:400px;height:300px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(79,142,247,0.15) 0%,transparent 70%);
+  pointer-events:none;
+}
+.dl-hero h2{
+  font-family:var(--font-display);font-size:32px;font-weight:800;
+  letter-spacing:-1px;margin-bottom:10px;position:relative;z-index:1;
+  word-break: break-word;
+}
+.dl-hero p{font-size:15px;color:var(--text3);margin-bottom:28px;position:relative;z-index:1;line-height:1.6}
+.dl-hero .btn-primary{position:relative;z-index:1;font-size:16px;padding:15px 36px}
+
+/* FOOTER */
+footer{
+  border-top:1px solid var(--border);
+  padding:32px 28px 48px;text-align:center;
+  max-width:1000px;margin:48px auto 0;
+  width: 100%;
+}
+.foot-links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+.foot-links a{font-size:13px;color:var(--text3);text-decoration:none;transition:color .15s}
+.foot-links a:hover{color:var(--accent2)}
+footer p{font-size:12px;color:var(--text3);line-height:1.8}
+
+/* ANIMATE IN */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.hero-grid{animation:fadeUp .6s ease both}
+.stats-strip{animation:fadeUp .6s .1s ease both}
+
+/* RESPONSIVE - TABLET */
+@media(max-width:700px){
+  .hero{padding:48px 20px 40px}
+  .hero-name{font-size:30px}
+  .stats-strip{grid-template-columns:repeat(2,1fr);padding:0 20px}
+  .feat-grid{grid-template-columns:repeat(2,1fr)}
+  .priv-grid{grid-template-columns:1fr}
+  .outer{padding:0 20px}
+  nav{padding:0 20px}
+  .hero-grid{gap:18px}
+  .hero-icon{width:96px;height:96px;border-radius:22px}
+  .dl-hero{padding:36px 24px}
+  .dl-hero h2{font-size:24px}
+  .sec-title{font-size:22px}
+  .shots-scroll{margin: 0 -8px}
+  .bmc-card{flex-direction:column;text-align:center}
+  .bmc-left{flex-direction:column}
+  .dev-card{flex-direction:column;text-align:center}
+}
+
+/* RESPONSIVE - MOBILE */
+@media(max-width:480px){
+  .hero{padding:36px 16px 32px}
+  .hero-name{font-size:26px;letter-spacing:-1px}
+  .hero-tagline{font-size:14px;margin-bottom:18px}
+  .hero-pill{gap:6px;margin-bottom:20px}
+  .hero-cta{flex-direction:column;align-items:stretch;width:100%}
+  .hero-cta .btn-primary,.hero-cta .btn-ghost{justify-content:center;width:100%}
+  .hero-grid{grid-template-columns:1fr;justify-items:center;text-align:center}
+  .hero-icon-wrap{margin:0 auto}
+  .hero-tag{margin-left:auto;margin-right:auto}
+  .hero-pill{justify-content:center}
+  .stats-strip{grid-template-columns:repeat(2,1fr);gap:8px;padding:0 16px}
+  .stat-card{padding:14px 10px}
+  .stat-val{font-size:22px}
+  .feat-grid{grid-template-columns:1fr}
+  .priv-grid{grid-template-columns:1fr}
+  .outer{padding:0 16px}
+  nav{padding:0 16px;height:50px}
+  .nav-brand{font-size:13px}
+  .nav-btn{padding:5px 10px;font-size:12px}
+  .hero-icon{width:80px;height:80px;border-radius:18px}
+  .dl-hero{padding:28px 16px;border-radius:16px}
+  .dl-hero h2{font-size:20px;letter-spacing:-0.5px}
+  .dl-hero p{font-size:14px}
+  .dl-hero .btn-primary{width:100%;justify-content:center;font-size:14px;padding:14px 24px}
+  .sec-title{font-size:20px}
+  .sec-label{font-size:10px}
+  .sec-gap{height:32px}
+  .foot-links{gap:12px}
+  .foot-links a{font-size:12px}
+  footer{padding:24px 16px 40px;margin-top:32px}
+  .irow{padding:12px 16px;font-size:13px;gap:8px}
+  .step-row{padding:16px;gap:14px}
+  .step-txt h4{font-size:14px}
+  .bmc-card{padding:16px}
+  .bmc-ico{width:40px;height:40px;font-size:20px}
+  .bmc-txt h4{font-size:14px}
+  .dev-card{padding:16px}
+  .desc-card{padding:20px}
+  .desc-card p{font-size:14px}
+  .shot{width:160px;border-radius:18px}
+  .shot-cap{padding:8px 10px;font-size:10px}
+  .wn-card{padding:18px}
+  .priv-main{padding:18px}
+  .priv-card{padding:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    <div class="nav-dot"></div>
+    App Store
+  </div>
+  <div class="nav-actions">
+    <a href="#features" class="nav-btn">Features</a>
+    <a href="#download" class="nav-btn">Privacy</a>
+    <a href="Bucket-v2_7-release.apk" class="nav-btn primary" download>⬇ Download</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid">
+    <div class="hero-icon-wrap">
+      <div class="hero-icon"><img src="appicon.png" alt="Bucket"></div>
+      <div class="hero-icon-ring"></div>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-tag">✦ Tor-Powered Messaging</div>
+      <div class="hero-name">Bucket<br>Messenger</div>
+      <div class="hero-tagline">Private. Decentralized. Your device is the server.</div>
+      <div class="hero-pills">
+        <span class="pill"><span>🔒</span> Zero Servers</span>
+        <span class="pill"><span>🌐</span> Tor Network</span>
+        <span class="pill"><span>🆓</span> Free Forever</span>
+        <span class="pill"><span>📵</span> No Phone Number</span>
+      </div>
+      <div class="hero-cta">
+        <a href="Bucket-v2_7-release.apk" class="btn-primary" download>⬇ Download APK</a>
+        <a href="#features" class="btn-ghost">See Features →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stat-card">
+    <div class="stat-val gold">4.9</div>
+    <div class="stat-stars">★★★★★</div>
+    <div class="stat-lbl">Rating</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-val accent">#1</div>
+    <div class="stat-stars" style="color:transparent;font-size:9px">—</div>
+    <div class="stat-lbl">Privacy Apps</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-val green">Zero</div>
+    <div class="stat-stars" style="color:transparent;font-size:9px">—</div>
+    <div class="stat-lbl">Data Collected</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-val" style="color:var(--text2)">Free</div>
+    <div class="stat-stars" style="color:transparent;font-size:9px">—</div>
+    <div class="stat-lbl">Price · Always</div>
+  </div>
+</div>
+
+<!-- SCREENSHOTS -->
+<div class="sec-gap"></div>
+<div class="outer">
+  <div class="sec-label">Preview</div>
+  <div class="sec-title">See it in action</div>
+  <div class="shots-scroll">
+    <div class="shot"><img src="5914.jpg" alt="Home"><div class="shot-cap">Home</div></div>
+    <div class="shot"><img src="5915.jpg" alt="Scan QR"><div class="shot-cap">Scan QR</div></div>
+    <div class="shot"><img src="5917.jpg" alt="My QR"><div class="shot-cap">My QR Code</div></div>
+    <div class="shot"><img src="5918.jpg" alt="Settings"><div class="shot-cap">Settings</div></div>
+  </div>
+  <!-- FEATURED BANNER IMAGE -->
+  <div class="banner-img">
+    <img src="file_00000000735c71fd80721286a959c8ac.png" alt="Bucket Messenger">
+  </div>
+</div>
+
+<!-- WHAT'S NEW -->
+<div class="sec-gap"></div>
+<div class="outer">
+  <div class="sec-label">Changelog</div>
+  <div class="sec-title">What's New</div>
+  <div class="wn-card">
+    <div class="wn-badge">v2.7 Beta · Latest</div>
+    <ul class="wn-list">
+      <li>Tor network — your device IS the server, no middleman ever</li>
+      <li>QR-based contact adding — no phone number, no identity leak</li>
+      <li>Auto-delete messages with fully customizable timer</li>
+      <li>Refresh Tor circuit on-demand for speed &amp; anonymity boost</li>
+      <li>On-device identity generation — keys never transmitted</li>
+      <li>Polished dark UI and improved connection reliability</li>
+    </ul>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div class="sec-gap"></div>
+<div class="outer" id="features">
+  <div class="sec-label">Why Bucket</div>
+  <div class="sec-title">Built different</div>
+  <div class="feat-grid">
+    <div class="feat-card">
+      <div class="feat-ico ico-b">🌐</div>
+      <div class="feat-name">Tor Network</div>
+      <div class="feat-desc">Every message routes through the Tor network. Your real IP is never exposed — not to contacts, not to anyone.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-ico ico-g">🔒</div>
+      <div class="feat-name">Zero Servers</div>
+      <div class="feat-desc">No backend. No cloud. No middleman. Your phone is the server — messages exist only between two devices.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-ico ico-p">📷</div>
+      <div class="feat-name">QR Identity</div>
+      <div class="feat-desc">Add contacts by scanning QR codes. No phone number required. Zero identity leakage at setup.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-ico ico-r">⏱</div>
+      <div class="feat-name">Auto-Delete</div>
+      <div class="feat-desc">Set messages to self-destruct after a timer you choose. Leave absolutely no trace on either device.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-ico ico-o">🔄</div>
+      <div class="feat-name">Circuit Refresh</div>
+      <div class="feat-desc">Request a new Tor circuit anytime. Better speed, fresh routing, extra anonymity on demand.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-ico ico-c">🛡️</div>
+      <div class="feat-name">On-Device Keys</div>
+      <div class="feat-desc">Your identity and cryptographic keys are generated and stored only on your device. Never transmitted.</div>
+    </div>
+  </div>
+</div>
+
+<!-- DESCRIPTION -->
+<div class="sec-gap"></div>
+<div class="outer">
+  <div class="sec-label">About</div>
+  <div class="sec-title">What is Bucket?</div>
+  <div class="desc-card">
+    <p><strong>Bucket</strong> is a private, decentralised messaging app with no central servers. Your device IS the server — messages travel peer-to-peer through the Tor network using your unique onion address.</p>
+    <p>Unlike WhatsApp or Telegram, Bucket stores nothing anywhere. No phone number, no email, no account creation. Just scan a QR code and start chatting with complete anonymity.</p>
+    <p>Built for journalists, activists, and anyone who believes a conversation should remain between two people — and no one else. Developed by <strong>Blacx-Tech</strong>.</p>
+  </div>
+</div>
+
+<!-- PRIVACY -->
+<div class="sec-gap"></div>
+<div class="outer" id="privacy">
+  <div class="sec-label">Data & Privacy</div>
+  <div class="sec-title">We see nothing</div>
+  <div class="priv-grid">
+    <div class="priv-main">
+      <div>
+        <div style="font-family:var(--font-display);font-size:17px;font-weight:800;margin-bottom:6px">No Data Collected. Ever.</div>
+        <div style="font-size:13px;color:var(--text3);margin-bottom:14px">Bucket has no servers to send data to. There is nothing to collect.</div>
+      </div>
+      <div class="priv-chips">
+        <span class="chip-g">✓ No Account</span>
+        <span class="chip-g">✓ No Phone Number</span>
+        <span class="chip-g">✓ No Analytics</span>
+        <span class="chip-g">✓ No Ads</span>
+        <span class="chip-b">⬡ E2E Encrypted</span>
+        <span class="chip-b">⬡ Tor Network</span>
+      </div>
+      <div class="zero-banner">✓ Zero Data Collected — Verified</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="priv-card">
+        <div class="priv-icon">👤</div>
+        <div class="priv-title">Anonymous Identity</div>
+        <div class="priv-desc">Your identity is a cryptographic key pair generated locally on your device. No name, no number needed.</div>
+      </div>
+      <div class="priv-card">
+        <div class="priv-icon">🕳️</div>
+        <div class="priv-title">Onion Routing</div>
+        <div class="priv-desc">Messages pass through multiple Tor nodes. No single point can trace the origin or destination.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW TO -->
+<div class="sec-gap"></div>
+<div class="outer">
+  <div class="sec-label">Quick Start</div>
+  <div class="sec-title">Up in 60 seconds</div>
+  <div class="steps-list">
+    <div class="step-row">
+      <div class="step-num">1</div>
+      <div class="step-txt"><h4>Download &amp; Install APK</h4><p>Get the Bucket APK below. On Android, tap to install. Enable "Install unknown apps" if prompted once.</p></div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">2</div>
+      <div class="step-txt"><h4>Tor Connects Automatically</h4><p>Launch Bucket. Tor starts on its own. Watch for the green dot — that's your signal you're private.</p></div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">3</div>
+      <div class="step-txt"><h4>Share Your QR Code</h4><p>Tap My QR and show or send your onion address QR only to people you fully trust.</p></div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">4</div>
+      <div class="step-txt"><h4>Scan &amp; Start Chatting</h4><p>Scan their QR. When both of you are online — your encrypted, serverless chat begins instantly.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- INFO TABLE -->
+<div class="sec-gap"></div>
+<div class="outer">
+  <div class="sec-label">Details</div>
+  <div class="sec-title">App Information</div>
+  <div class="info-table">
+    <div class="irow"><span class="ik">Developer</span><span class="iv">Blacx-Tech</span></div>
+    <div class="irow"><span class="ik">Version</span><span class="iv">2.7 Beta</span></div>
+    <div class="irow"><span class="ik">Platform</span><span class="iv">Android (APK)</span></div>
+    <div class="irow"><span class="ik">Network</span><span class="iv b">Tor Onion Routing</span></div>
+    <div class="irow"><span class="ik">Price</span><span class="iv g">Free — Forever</span></div>
+    <div class="irow"><span class="ik">Category</span><span class="iv">Privacy · Messaging</span></div>
+    <div class="irow"><span class="ik">Data Collected</span><span class="iv g">None</span></div>
+    <div class="irow"><span class="ik">Server</span><span class="iv">Your Device</span></div>
+    <div class="irow"><span class="ik">Age Rating</span><span class="iv">17+</span></div>
+  </div>
+</div>
+
+<!-- DEVELOPER -->
+<div class="sec-gap"></div>
+<div class="outer">
+  <div class="sec-label">Developer</div>
+  <div class="sec-title">Made by</div>
+  <div class="dev-card">
+    <div class="dev-left">
+      <h4>Blacx-Tech</h4>
+      <p>Privacy-first software · Independent developer</p>
+    </div>
+    <div class="dev-badge">v2.7 Beta</div>
+  </div>
+</div>
+
+<!-- BMC -->
+<div class="sec-gap"></div>
+<div class="outer">
+  <div class="sec-label">Support</div>
+  <div class="sec-title">Keep it free</div>
+  <a href="https://buymeacoffee.com/blacx" target="_blank" class="bmc-card">
+    <div class="bmc-left">
+      <div class="bmc-ico">☕</div>
+      <div class="bmc-txt">
+        <h4>Buy Me a Coffee</h4>
+        <p>Support Blacx-Tech · Keep Bucket free &amp; open source</p>
+      </div>
+    </div>
+    <div class="bmc-action">Donate ☕</div>
+  </a>
+</div>
+
+<!-- DOWNLOAD -->
+<div class="sec-gap"></div>
+<div class="outer" id="download" style="margin-bottom:8px">
+  <div class="dl-hero">
+    <h2>Download Bucket — Free</h2>
+    <p>No signup. No servers. No surveillance.<br>Just privacy, the way it should be.</p>
+    <a href="Bucket-v2_7-release.apk" class="btn-primary" download>⬇ Download APK · v2.7 Beta</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Security Model</a>
+    <a href="#">GitHub</a>
+    <a href="https://buymeacoffee.com/blacx" target="_blank">☕ Buy Me a Coffee</a>
+  </div>
+  <p>© 2025 Blacx-Tech · Bucket Messenger v2.7 Beta<br>
+  Private · Decentralized · Secure · Your device is your server.<br>
+  <span style="opacity:.4;font-size:11px">We store nothing. We see nothing.</span></p>
+</footer>
+
+</body>
+</html>
