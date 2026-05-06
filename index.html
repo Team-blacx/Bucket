@@ -244,17 +244,6 @@ nav{
 .btn-bmc:hover{background:#FFCC00;transform:scale(1.03)}
 .btn-bmc:active{transform:scale(0.95)}
 
-/* ── SCROLL FADE ANIMATION ── */
-.fade-section{
-  opacity:0;
-  transform:translateY(30px);
-  transition:opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-.fade-section.is-visible{
-  opacity:1;
-  transform:translateY(0);
-}
-
 /* ── SCREENSHOT CAROUSEL ── */
 .shots{
   padding:60px 0 0;
@@ -652,7 +641,7 @@ footer p{font-size:12px;color:var(--text3);line-height:1.8}
 </div>
 
 <!-- SCREENSHOTS -->
-<div class="wrap shots fade-section">
+<div class="wrap shots">
     <div class="shots-scroll">
       <div class="shot"><img src="5914.jpg" alt="Home"></div>
       <div class="shot"><img src="5915.jpg" alt="Scan QR"></div>
@@ -662,7 +651,7 @@ footer p{font-size:12px;color:var(--text3);line-height:1.8}
   </div>
 
 <!-- WHAT'S NEW -->
-<div class="wrap sec fade-section">
+<div class="wrap sec">
   <div class="sec-label">What's New</div>
   <div class="wn-card">
     <div class="wn-ver"><span>v2.7</span> Beta · Latest Release</div>
@@ -678,7 +667,7 @@ footer p{font-size:12px;color:var(--text3);line-height:1.8}
 </div>
 
 <!-- DESCRIPTION -->
-<div class="wrap sec fade-section">
+<div class="wrap sec">
   <div class="sec-label">Description</div>
   <div class="sec-title">About Bucket</div>
   <div class="desc-card">
@@ -689,7 +678,7 @@ footer p{font-size:12px;color:var(--text3);line-height:1.8}
 </div>
 
 <!-- PRIVACY -->
-<div class="wrap sec fade-section">
+<div class="wrap sec">
   <div class="sec-label">Data & Privacy</div>
   <div class="sec-title">We See Nothing</div>
   <div class="priv-main">
@@ -724,7 +713,7 @@ footer p{font-size:12px;color:var(--text3);line-height:1.8}
 </div>
 
 <!-- FEATURES -->
-<div class="wrap sec fade-section" id="features">
+<div class="wrap sec" id="features">
   <div class="sec-label">Features</div>
   <div class="sec-title">Built Different</div>
     <div class="feat-grid">
@@ -774,7 +763,7 @@ footer p{font-size:12px;color:var(--text3);line-height:1.8}
 </div>
 
 <!-- HOW TO -->
-<div class="wrap sec fade-section">
+<div class="wrap sec">
   <div class="sec-label">Quick Start</div>
   <div class="sec-title">Up in 60 Seconds</div>
   <div class="steps">
@@ -802,7 +791,7 @@ footer p{font-size:12px;color:var(--text3);line-height:1.8}
 </div>
 
 <!-- DEVELOPER -->
-<div class="wrap sec dev-section fade-section">
+<div class="wrap sec dev-section">
   <div class="sec-label">Developer</div>
   <div class="sec-title">Meet the Developer</div>
   <div class="dev-card">
@@ -828,25 +817,6 @@ footer p{font-size:12px;color:var(--text3);line-height:1.8}
     <span style="opacity:.4;font-size:11px">We store nothing. We see nothing.</span></p>
   </footer>
 </div>
-
-<script>
-// Scroll Fade In Animation
-document.addEventListener('DOMContentLoaded', () => {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-      }
-    });
-  }, {
-    threshold: 0.15 // Trigger when 15% of the section is visible
-  });
-
-  document.querySelectorAll('.fade-section').forEach((section) => {
-    observer.observe(section);
-  });
-});
-</script>
 
 </body>
 </html>
