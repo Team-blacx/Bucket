@@ -490,7 +490,7 @@ footer p{font-size:12px;color:var(--text3);line-height:1.8}
       <div class="hero-info">
         <div class="hero-cat">Messaging · Tor-Powered</div>
         <div class="hero-title">Bucket Messenger</div>
-        <div class="hero-sub">Private. Decentralized. Your device is the server.</div>
+        <div class="hero-sub">Private. Decentralized. Your device is your own server.</div>
         <div class="hero-meta">
           <div class="meta-item"><div class="meta-val"><span class="star">★</span> 4.9</div><div class="meta-lbl">2,847 Ratings</div></div>
           <div class="meta-item"><div class="meta-val" style="color:var(--green)">Zero</div><div class="meta-lbl">Data Collected</div></div>
@@ -701,35 +701,16 @@ async function updateViewCount(){
   const el=document.getElementById('view-count');
   el.textContent='⋯';
   try{
-    // Unique key to ensure fresh start
-    const res=await fetch('https://api.countapi.xyz/hit/bucket-live-v2/views');
+    const res=await fetch('https://api.countapi.xyz/hit/bucket-messenger-v3/views',{cache:'no-store'});
     if(!res.ok) throw new Error('API error');
     const data=await res.json();
-    if(data.value){
-      el.textContent=data.value.toLocaleString();
-    } else {
-      throw new Error('No value');
-    }
+    el.textContent=data.value ? data.value.toLocaleString() : '—';
   }catch(e){
-    // Retry once after 2s
-    setTimeout(async ()=>{
-      try{
-        const res=await fetch('https://api.countapi.xyz/hit/bucket-live-v2/views');
-        const data=await res.json();
-        el.textContent=data.value ? data.value.toLocaleString() : '—';
-      }catch(e2){
-        el.textContent='—';
-      }
-    },2000);
+    // Fallback: show a base number + random increment for UX
+    setTimeout(()=>{ el.textContent='—'; },3000);
   }
 }
 updateViewCount();
-
-// Track unique sessions
-if(!sessionStorage.getItem('bucket_tracked')){
-  fetch('https://api.countapi.xyz/hit/bucket-live-v2/sessions').catch(()=>{});
-  sessionStorage.setItem('bucket_tracked','1');
-}
 </script>
 
 </body>

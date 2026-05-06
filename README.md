@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <strong>Your device is the server. No phone number. No account. Zero data collected.</strong>
+  <strong>Your device is your own server. No phone number. No account. Zero data collected.</strong>
 </p>
 
 <p align="center">
