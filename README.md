@@ -89,6 +89,11 @@ Built for journalists, activists, and anyone who believes a conversation should 
 
 ---
 
+## ⚖️ Legal Disclaimer
+> **Important:** Bucket is developed strictly for educational and privacy protection purposes. Team-Blacx is **not responsible** for any misuse, illegal activities, or damages caused by users of this software. By using this application, you agree that you are solely responsible for your actions and compliance with local laws. This software is provided "as is" without any warranty.
+
+---
+
 <p align="center">
   <em>Built with ❤️ by Blacx-Tech</em><br>
   <sub>We store nothing. We see nothing.</sub>
