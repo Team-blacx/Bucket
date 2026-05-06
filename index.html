@@ -305,22 +305,27 @@ nav{
   border-left: 1px solid rgba(255,255,255,0.25);
   border-radius: 16px;
   box-shadow: 0 12px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-  transform: perspective(1000px) translateZ(0);
+  transition: border-color 0.3s ease;
 }
 .glass-card:hover {
-  transform: perspective(1000px) translateY(-6px) translateZ(10px);
   border-color: rgba(255,255,255,0.3);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.2), 0 0 30px rgba(255,255,255,0.05);
 }
 
 /* ── DESCRIPTION ── */
 .desc-card {
   padding:24px;
-  cursor: default;
+  background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-top: 1px solid rgba(255,255,255,0.25);
+  border-left: 1px solid rgba(255,255,255,0.25);
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+  transition: border-color 0.3s ease;
 }
 .desc-card:hover {
-  transform: perspective(1000px) translateY(-2px) translateZ(5px);
+  border-color: rgba(255,255,255,0.3);
 }
 .desc-card p{font-size:15px;color:rgba(255,255,255,0.8);line-height:1.65;margin-bottom:12px}
 .desc-card p:last-child{margin:0}
@@ -333,11 +338,9 @@ nav{
   border-radius: 16px;
   padding:24px;margin-bottom:12px;
   box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 25px rgba(48,209,88,0.15);
-  transition: all 0.4s ease;
+  transition: border-color 0.3s ease;
 }
 .priv-main:hover {
-  transform: perspective(1000px) translateY(-4px) translateZ(10px);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(48,209,88,0.25);
   border-color: rgba(48,209,88,0.5);
 }
 .priv-main h3{font-size:18px;font-weight:800;margin-bottom:6px;color:var(--green)}
@@ -353,7 +356,18 @@ nav{
 .priv-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .priv-card{
   padding:18px;
-  cursor: default;
+  background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-top: 1px solid rgba(255,255,255,0.25);
+  border-left: 1px solid rgba(255,255,255,0.25);
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+  transition: border-color 0.3s ease;
+}
+.priv-card:hover {
+  border-color: rgba(255,255,255,0.3);
 }
 .priv-card .ico{
   width:56px;height:56px;border-radius:16px;
@@ -385,13 +399,10 @@ nav{
   border-left: 1px solid rgba(255,255,255,0.25);
   border-radius: 16px;
   box-shadow: 0 12px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-  transform: perspective(1000px) translateZ(0);
+  transition: border-color 0.3s ease;
 }
 .feat-card:hover {
-  transform: perspective(1000px) translateY(-6px) translateZ(10px);
   border-color: rgba(255,255,255,0.3);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.2), 0 0 30px rgba(255,255,255,0.05);
 }
 .feat-ico{
   width:52px;height:52px;border-radius:16px;
@@ -421,13 +432,10 @@ nav{
   border-left: 1px solid rgba(255,255,255,0.25);
   border-radius: 16px;
   box-shadow: 0 12px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-  transform: perspective(1000px) translateZ(0);
+  transition: border-color 0.3s ease;
 }
 .wn-card:hover {
-  transform: perspective(1000px) translateY(-6px) translateZ(10px);
   border-color: rgba(255,255,255,0.3);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.2), 0 0 30px rgba(255,255,255,0.05);
 }
 .wn-ver{
   display:inline-flex;align-items:center;gap:6px;
@@ -471,13 +479,10 @@ nav{
   border-left: 1px solid rgba(255,255,255,0.25);
   backdrop-filter: blur(20px);
   box-shadow: 0 12px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-  transform: perspective(1000px) translateZ(0);
+  transition: border-color 0.3s ease;
 }
 .steps:hover {
-  transform: perspective(1000px) translateY(-6px) translateZ(10px);
   border-color: rgba(255,255,255,0.3);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.2), 0 0 30px rgba(255,255,255,0.05);
 }
 .srow{display:flex;align-items:flex-start;gap:14px;padding:16px 18px;border-bottom:1px solid rgba(255,255,255,0.08)}
 .srow:last-child{border:none}
@@ -499,6 +504,7 @@ nav{
 }
 .dev-card{
   padding:18px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
   background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01));
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -507,13 +513,10 @@ nav{
   border-left: 1px solid rgba(255,255,255,0.25);
   border-radius: 16px;
   box-shadow: 0 12px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-  transform: perspective(1000px) translateZ(0);
+  transition: border-color 0.3s ease;
 }
 .dev-card:hover {
-  transform: perspective(1000px) translateY(-6px) translateZ(10px);
   border-color: rgba(255,255,255,0.3);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.2), 0 0 30px rgba(255,255,255,0.05);
 }
 .dev-left h4{font-size:16px;font-weight:700;margin-bottom:2px; color: #fff}
 .dev-left p{font-size:13px;color:rgba(255,255,255,0.6)}
