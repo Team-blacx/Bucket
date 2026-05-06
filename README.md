@@ -84,7 +84,7 @@ Built for journalists, activists, and anyone who believes a conversation should 
 
 ## 📬 Connect
 
-- **Telegram:** [t.me/team-blacx](https://t.me/team_blacx)
+- **Telegram:** [t.me/team_blacx](https://t.me/team_blacx)
 - **Support:** [buymeacoffee.com/blacx](https://buymeacoffee.com/blacx)
 
 ---
