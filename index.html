@@ -363,16 +363,20 @@ nav{
 
 /* ── DEV + BMC ── */
 .dev-card{
-  background:var(--card);border:1px solid var(--border);
+  background:var(--card);
+  border:1px solid rgba(255,255,255,0.15);
   border-radius:var(--r);padding:16px 18px;
   display:flex;align-items:center;justify-content:space-between;gap:12px;
   margin-bottom:12px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.3);
 }
 .dev-left h4{font-size:15px;font-weight:700;margin-bottom:2px}
 .dev-left p{font-size:13px;color:var(--text3)}
 .dev-badge{
-  background:var(--card2);border:1px solid var(--border);
-  border-radius:8px;padding:4px 10px;font-size:12px;color:var(--text2);font-weight:500;
+  background:var(--card2);border:1px solid rgba(255,255,255,0.1);
+  border-radius:8px;padding:4px 10px;
+  font-size:12px;color:var(--text2);font-weight:500;
+  white-space:nowrap;
 }
 .bmc{
   display:flex;align-items:center;justify-content:space-between;gap:14px;
