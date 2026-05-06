@@ -1,6 +1,10 @@
 # Bucket — Private Messenger on Tor
 
 <p align="center">
+  <img src="https://team-blacx.github.io/Bucket/file_00000000735c71fd80721286a959c8ac.png" alt="Bucket Banner" width="100%">
+</p>
+
+<p align="center">
   <img src="https://team-blacx.github.io/Bucket/appicon.png" alt="Bucket" width="120" height="120">
 </p>
 
