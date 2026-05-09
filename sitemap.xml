@@ -1,15 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0">
+
+  <!-- Main Page - Highest Priority -->
   <url>
     <loc>https://team-blacx.github.io/Bucket/</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <mobile:mobile/>
+    <image:image>
+      <image:loc>https://team-blacx.github.io/Bucket/appicon.png</image:loc>
+      <image:title>Bucket Messenger - Private Decentralized Tor Chat App</image:title>
+      <image:caption>Bucket Messenger App Icon - Anonymous P2P Messaging on Tor Network</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://team-blacx.github.io/Bucket/banner.png</image:loc>
+      <image:title>Bucket Messenger Banner - No Servers, No Phone Number, No Tracking</image:title>
+      <image:caption>Bucket - Private. Decentralized. Secure. Messaging App powered by Tor</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://team-blacx.github.io/Bucket/5914.jpg</image:loc>
+      <image:title>Bucket Messenger Home Screen - Anonymous Chat Interface</image:title>
+      <image:caption>Bucket Messenger home screen showing no server P2P chat</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://team-blacx.github.io/Bucket/5915.jpg</image:loc>
+      <image:title>Bucket Messenger QR Scan - Add Contacts Without Phone Number</image:title>
+      <image:caption>Scan QR code to add contacts securely on Bucket Messenger</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://team-blacx.github.io/Bucket/5917.jpg</image:loc>
+      <image:title>Bucket Messenger My QR - Unique Tor Onion Address Identity</image:title>
+      <image:caption>Your unique onion address QR code on Bucket Messenger</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://team-blacx.github.io/Bucket/5918.jpg</image:loc>
+      <image:title>Bucket Messenger Settings - Tor Connection and Privacy Controls</image:title>
+      <image:caption>Bucket Messenger settings showing Tor connected status and auto-delete</image:caption>
+    </image:image>
   </url>
-  <url>
-    <loc>https://team-blacx.github.io/Bucket/Bucket-v2_7-release.apk</loc>
-    <lastmod>2026-05-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
+
 </urlset>
